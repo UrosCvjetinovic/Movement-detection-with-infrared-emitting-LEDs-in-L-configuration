@@ -1,0 +1,277 @@
+/Diplomski/FreeRTOS_i2c/.project
+/Diplomski/FreeRTOS_i2c/FreeRTOSConfig.h
+/Diplomski/FreeRTOS_i2c/common.h
+/Diplomski/FreeRTOS_i2c/i2c_loopback.c
+/Diplomski/FreeRTOS_i2c/priorities.h
+/Diplomski/FreeRTOS_i2c/rx_i2c_task.c
+/Diplomski/FreeRTOS_i2c/rx_i2c_task.h
+/Diplomski/FreeRTOS_i2c/rx_uart_task.c
+/Diplomski/FreeRTOS_i2c/rx_uart_task.h
+/Diplomski/FreeRTOS_i2c/tm4c123gh6pm_startup_ccs_gcc.c
+/Diplomski/FreeRTOS_i2c/tx_i2c_task.c
+/Diplomski/FreeRTOS_i2c/tx_i2c_task.h
+/Diplomski/FreeRTOS_i2c/tx_uart_task.c
+/Diplomski/FreeRTOS_i2c/tx_uart_task.h
+/Diplomski/FreeRTOS_proximity-Debug/FreeRTOSConfig.h
+/Diplomski/FreeRTOS_proximity-Debug/common.c
+/Diplomski/FreeRTOS_proximity-Debug/common.h
+/Diplomski/FreeRTOS_proximity-Debug/communication_task.c
+/Diplomski/FreeRTOS_proximity-Debug/communication_task.h
+/Diplomski/FreeRTOS_proximity-Debug/gesture_task.c
+/Diplomski/FreeRTOS_proximity-Debug/gesture_task.h
+/Diplomski/FreeRTOS_proximity-Debug/priorities.h
+/Diplomski/FreeRTOS_proximity-Debug/proximity_api.c
+/Diplomski/FreeRTOS_proximity-Debug/proximity_api.h
+/Diplomski/FreeRTOS_proximity-Debug/proximity_setup.c
+/Diplomski/FreeRTOS_proximity-Debug/read_task.c
+/Diplomski/FreeRTOS_proximity-Debug/read_task.h
+/Diplomski/FreeRTOS_proximity-Debug/si115x_functions.h
+/Diplomski/FreeRTOS_proximity-Debug/tm4c123gh6pm_startup_ccs_gcc.c
+/Diplomski/FreeRTOS_uartecho/.ccsproject
+/Diplomski/FreeRTOS_uartecho/.cproject
+/Diplomski/FreeRTOS_uartecho/.gitignore
+/Diplomski/FreeRTOS_uartecho/.project
+/Diplomski/FreeRTOS_uartecho/.settings/org.eclipse.core.resources.prefs
+/Diplomski/FreeRTOS_uartecho/Debug__TI/ccsObjs.opt
+/Diplomski/FreeRTOS_uartecho/Debug__TI/freertos_demo.d
+/Diplomski/FreeRTOS_uartecho/Debug__TI/makefile
+/Diplomski/FreeRTOS_uartecho/Debug__TI/objects.mk
+/Diplomski/FreeRTOS_uartecho/Debug__TI/receive_task.d
+/Diplomski/FreeRTOS_uartecho/Debug__TI/sources.mk
+/Diplomski/FreeRTOS_uartecho/Debug__TI/subdir_rules.mk
+/Diplomski/FreeRTOS_uartecho/Debug__TI/subdir_vars.mk
+/Diplomski/FreeRTOS_uartecho/Debug__TI/tm4c123gh6pm_startup_ccs.d
+/Diplomski/FreeRTOS_uartecho/Debug__TI/tm4c123gh6pm_startup_ccs.obj
+/Diplomski/FreeRTOS_uartecho/Debug__TI/tm4c123gh6pm_startup_ccs_gcc.d
+/Diplomski/FreeRTOS_uartecho/Debug__TI/transmit_task.d
+/Diplomski/FreeRTOS_uartecho/FreeRTOSConfig.h
+/Diplomski/FreeRTOS_uartecho/freertos_demo.c
+/Diplomski/FreeRTOS_uartecho/priorities.h
+/Diplomski/FreeRTOS_uartecho/receive_task.c
+/Diplomski/FreeRTOS_uartecho/receive_task.h
+/Diplomski/FreeRTOS_uartecho/targetConfigs/Tiva TM4C123GH6PM.ccxml
+/Diplomski/FreeRTOS_uartecho/targetConfigs/readme.txt
+/Diplomski/FreeRTOS_uartecho/tm4c123gh6pm.cmd
+/Diplomski/FreeRTOS_uartecho/tm4c123gh6pm_startup_ccs.c
+/Diplomski/FreeRTOS_uartecho/tm4c123gh6pm_startup_ccs_gcc.c
+/Diplomski/FreeRTOS_uartecho/transmit_task.c
+/Diplomski/FreeRTOS_uartecho/transmit_task.h
+/Diplomski/SPI/.ccsproject
+/Diplomski/SPI/.cproject
+/Diplomski/SPI/.gitignore
+/Diplomski/SPI/.project
+/Diplomski/SPI/main.c
+/Diplomski/SPI/tm4c123gh6pm.cmd
+/Diplomski/SPI/tm4c123gh6pm_startup_ccs.c
+/Diplomski/Workspace/keil/Pokusaj1/Objects
+/Diplomski/Workspace/keil/cu160093/Objects
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/BrowserMetrics/BrowserMetrics-611EEE90-2E10.pma
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/AutofillStrikeDatabase/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/AutofillStrikeDatabase/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/BudgetDatabase/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/BudgetDatabase/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/data_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/data_1
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/data_2
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/data_3
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/f_000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/f_000002
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/f_000003
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/f_000004
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cache/index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/09a5a341b7772d51_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/2d10a4a119e690c8_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/2e06ed812787780c_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/3d9ad58323d5f704_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/5d1a404f0cf05e9c_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/5ee1e681565305de_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/703b991cbebd4fdb_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/826b61d186d453d2_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/955371fbb8eb723a_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/ad8b3a31a2f7efcf_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/b07d6d2e8b2da4cb_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/bdada09dfbc96c56_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/e3bcc2481a384304_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/js/index-dir/the-real-index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/wasm/index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Code Cache/wasm/index-dir/the-real-index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cookies
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Cookies-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Current Session
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Current Tabs
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Extension State/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Extension State/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Extension State/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Extension State/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Extension State/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Favicons
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Favicons-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Feature Engagement Tracker/AvailabilityDB/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Feature Engagement Tracker/AvailabilityDB/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Feature Engagement Tracker/EventDB/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Feature Engagement Tracker/EventDB/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GCM Store/Encryption/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GCM Store/Encryption/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GCM Store/Encryption/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GCM Store/Encryption/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GCM Store/Encryption/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GPUCache/data_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GPUCache/data_1
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GPUCache/data_2
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GPUCache/data_3
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/GPUCache/index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/History
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/History Provider Cache
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/History-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Local Storage/leveldb/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Local Storage/leveldb/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Local Storage/leveldb/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Local Storage/leveldb/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Local Storage/leveldb/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Login Data
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Login Data-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Media History
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Media History-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Network Action Predictor
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Network Action Predictor-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Network Persistent State
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Platform Notifications/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Platform Notifications/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Platform Notifications/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Platform Notifications/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Platform Notifications/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Preferences
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/README
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Secure Preferences
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Session Storage/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Session Storage/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Session Storage/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Session Storage/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Session Storage/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Shortcuts
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Shortcuts-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Site Characteristics Database/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Site Characteristics Database/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Site Characteristics Database/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Site Characteristics Database/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Site Characteristics Database/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Sync Data/LevelDB/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Sync Data/LevelDB/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Sync Data/LevelDB/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Sync Data/LevelDB/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Sync Data/LevelDB/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Top Sites
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Top Sites-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Visited Links
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Web Data
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/Web Data-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/data_reduction_proxy_leveldb/MANIFEST-000002
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/heavy_ad_intervention_opt_out.db
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/heavy_ad_intervention_opt_out.db-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/previews_opt_out.db
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/previews_opt_out.db-journal
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/metadata/000003.log
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/metadata/CURRENT
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/metadata/LOCK
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/metadata/LOG
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Default/shared_proto_db/metadata/MANIFEST-000001
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/First Run
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/GrShaderCache/GPUCache/data_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/GrShaderCache/GPUCache/data_1
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/GrShaderCache/GPUCache/data_2
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/GrShaderCache/GPUCache/data_3
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/GrShaderCache/GPUCache/index
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Last Browser
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Last Version
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Local State
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Local Storage - EXT/http_127.0.0.1.localstorage
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/Module Info Cache
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/ShaderCache/GPUCache/data_0
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/ShaderCache/GPUCache/data_1
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/ShaderCache/GPUCache/data_2
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/ShaderCache/GPUCache/data_3
+/Diplomski/Workspace/CCS/.jxbrowser.userdata/ShaderCache/GPUCache/index
+/Diplomski/Workspace/CCS/.metadata/.lock
+/Diplomski/Workspace/CCS/.metadata/.log
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/C2000.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/C5500.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/C6000.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/C7000.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/EVE.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/MSP430.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/MSP432.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/PRU.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.builddefinitions.generator/11.0.0.002/TMS470.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.ccstudio.project.ui/dialog_settings.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.dvt.analyzersuite/TransportParams.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.dvt.datamodel/SolutionMgr.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.dvt.energytrace/EnergyTrace.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.dvt.energytrace/etpo.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/com.ti.dvt.ideadapter/IDEAdapterMgr.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.cdt.core/.log
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.cdt.make.core/specs.cpp
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.indexes/properties.index
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/org.eclipse.egit.core/GitProjectData.properties
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/history.version
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.version
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.root/1.tree
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.ti.ccstudio.branding.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.ti.ccstudio.debug.ui.5.1.1.or.higher
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.ti.ccstudio.ui.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.cdt.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.cdt.debug.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.cdt.ui.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.ui.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jsch.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.rse.core.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.rse.ui.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.ide.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.workbench.prefs
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.core/.log
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.core/initializerMarks/org.eclipse.rse.internal.core.RSELocalConnectionInitializer.mark
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.core/profiles/PRF.urosc_17/FP.local.files_0/node.properties
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.core/profiles/PRF.urosc_17/H.local_16/node.properties
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.core/profiles/PRF.urosc_17/node.properties
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.rse.ui/.log
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.tm.terminal.view.ui/.executables/data.properties
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
+/Diplomski/Workspace/CCS/.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
+/Diplomski/Workspace/CCS/.metadata/version.ini
+/Diplomski/Workspace/CCS/Proximity/.ccsproject
+/Diplomski/Workspace/CCS/Proximity/.cproject
+/Diplomski/Workspace/CCS/Proximity/.gitignore
+/Diplomski/Workspace/CCS/Proximity/.launches/Proximity.launch
+/Diplomski/Workspace/CCS/Proximity/.project
+/Diplomski/Workspace/CCS/Proximity/.settings/com.ti.ccstudio.project.core.prefs
+/Diplomski/Workspace/CCS/Proximity/.settings/org.eclipse.cdt.codan.core.prefs
+/Diplomski/Workspace/CCS/Proximity/.settings/org.eclipse.cdt.debug.core.prefs
+/Diplomski/Workspace/CCS/Proximity/.settings/org.eclipse.core.resources.prefs
+/Diplomski/Workspace/CCS/Proximity/main.c
+/Diplomski/Workspace/CCS/Proximity/targetConfigs/Tiva TM4C123GH6PM.ccxml
+/Diplomski/Workspace/CCS/Proximity/targetConfigs/readme.txt
+/Diplomski/Workspace/CCS/Proximity/tm4c123gh6pm.cmd
+/Diplomski/Workspace/CCS/Proximity/tm4c123gh6pm_startup_ccs.c
+/Diplomski/Workspace/CCS/RemoteSystemsTempFiles/.project
+/Tiva Libs
+/Instalacija
+/Diplomski/Workspace/keil/RTOS_project/Objects
