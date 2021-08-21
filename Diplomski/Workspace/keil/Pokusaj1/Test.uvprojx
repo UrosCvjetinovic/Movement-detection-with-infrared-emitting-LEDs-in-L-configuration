@@ -176,7 +176,7 @@
             <GenPPlst>0</GenPPlst>
             <AdsCpuType>"Cortex-M4"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
-            <mOS>0</mOS>
+            <mOS>1</mOS>
             <uocRom>0</uocRom>
             <uocRam>0</uocRam>
             <hadIROM>1</hadIROM>
@@ -396,6 +396,16 @@
               <FileType>5</FileType>
               <FilePath>.\Source\Application.h</FilePath>
             </File>
+            <File>
+              <FileName>ConfigHardware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ConfigHardware.c</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigHardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\ConfigHardware.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -436,6 +446,11 @@
               <FileType>1</FileType>
               <FilePath>.\Drivers\utils\uartstdio.c</FilePath>
             </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Drivers\driverlib\i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -465,6 +480,18 @@
       </component>
     </components>
     <files>
+      <file attr="config" category="source" name="CMSIS\RTOS2\RTX\Config\RTX_Config.c" version="5.1.1">
+        <instance index="0" removed="1">RTE\CMSIS\RTX_Config.c</instance>
+        <component Capiversion="2.1.3" Cclass="CMSIS" Cgroup="RTOS2" Csub="Keil RTX5" Cvariant="Library" Cvendor="ARM" Cversion="5.5.3" condition="RTOS2 RTX5"/>
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="header" name="CMSIS\RTOS2\RTX\Config\RTX_Config.h" version="5.5.2">
+        <instance index="0" removed="1">RTE\CMSIS\RTX_Config.h</instance>
+        <component Capiversion="2.1.3" Cclass="CMSIS" Cgroup="RTOS2" Csub="Keil RTX5" Cvariant="Library" Cvendor="ARM" Cversion="5.5.3" condition="RTOS2 RTX5"/>
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
+        <targetInfos/>
+      </file>
       <file attr="config" category="source" condition="Compiler ARMCC" name="Device\Source\ARM\startup_TM4C123.s" version="1.0.0">
         <instance index="0">RTE\Device\TM4C123GH6PM\startup_TM4C123.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="TM4C123x CMSIS"/>
@@ -480,6 +507,12 @@
         <targetInfos>
           <targetInfo name="TM4C123GH6PM"/>
         </targetInfos>
+      </file>
+      <file attr="config" category="header" condition="CoreM" name="CMSIS\RTOS2\FreeRTOS\Config\ARMCM\FreeRTOSConfig.h" version="10.2.0">
+        <instance index="0" removed="1">RTE\RTOS\FreeRTOSConfig.h</instance>
+        <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Config" Cvariant="CMSIS RTOS2" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Config CMSIS RTOS2"/>
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos/>
       </file>
     </files>
   </RTE>

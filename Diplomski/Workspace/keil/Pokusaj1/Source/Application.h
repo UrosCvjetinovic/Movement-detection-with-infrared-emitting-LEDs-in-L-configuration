@@ -11,7 +11,7 @@
 
 
 #define PART_TM4C123GH6PM
-#define TARGET_IS_TM4C123_
+//#define TARGET_IS_TM4C123_
 #define UART_BUFFERED
 
 #include "driverlib\debug.h"
@@ -23,6 +23,7 @@
 #include "driverlib\sysctl.h"
 #include "driverlib\systick.h"
 #include "driverlib\uart.h"
+#include "driverlib\i2c.h"
 
 #include "utils\uartstdio.h"
 
@@ -34,4 +35,4 @@
 #include "inc\hw_types.h"
 #include "inc\hw_uart.h"
 
-#endif
+#endif //APPLICATION_H
