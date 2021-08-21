@@ -13,6 +13,7 @@
 #define PART_TM4C123GH6PM
 //#define TARGET_IS_TM4C123_
 #define UART_BUFFERED
+#define SLAVE_ADDRESS 0x3C
 
 #include "driverlib\gpio.h"
 #include "driverlib\interrupt.h"

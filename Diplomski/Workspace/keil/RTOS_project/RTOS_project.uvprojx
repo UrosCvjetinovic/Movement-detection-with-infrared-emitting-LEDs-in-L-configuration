@@ -449,14 +449,34 @@
               <FilePath>.\Sources\main.c</FilePath>
             </File>
             <File>
-              <FileName>configureHardware.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Sources\configureHardware.c</FilePath>
+              <FileName>priorities.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\priorities.h</FilePath>
             </File>
             <File>
-              <FileName>configureHardware.h</FileName>
+              <FileName>UserFeedback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\UserFeedback.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserFeedback.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Sources\configureHardware.h</FilePath>
+              <FilePath>.\Sources\UserFeedback.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\ConfigureHardware.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\ConfigureHardware.c</FilePath>
+            </File>
+            <File>
+              <FileName>App.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\App.c</FilePath>
             </File>
           </Files>
         </Group>
