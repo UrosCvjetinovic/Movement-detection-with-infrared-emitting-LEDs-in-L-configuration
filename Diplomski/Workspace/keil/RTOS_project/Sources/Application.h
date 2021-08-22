@@ -13,6 +13,7 @@
 #define PART_TM4C123GH6PM
 //#define TARGET_IS_TM4C123_
 #define UART_BUFFERED
+#define SLAVE_ADDRESS 0x3C
 
 #include "driverlib\gpio.h"
 #include "driverlib\interrupt.h"
@@ -22,6 +23,7 @@
 #include "driverlib\sysctl.h"
 #include "driverlib\systick.h"
 #include "driverlib\uart.h"
+#include "driverlib\i2c.h"
 
 #include "utils\uartstdio.h"
 
@@ -32,5 +34,6 @@
 #include "inc\hw_sysctl.h"
 #include "inc\hw_types.h"
 #include "inc\hw_uart.h"
+#include "inc\hw_i2c.h"
 
 #endif

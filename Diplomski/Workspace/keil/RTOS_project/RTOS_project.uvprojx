@@ -448,6 +448,36 @@
               <FileType>1</FileType>
               <FilePath>.\Sources\main.c</FilePath>
             </File>
+            <File>
+              <FileName>priorities.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\priorities.h</FilePath>
+            </File>
+            <File>
+              <FileName>UserFeedback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\UserFeedback.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserFeedback.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\UserFeedback.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\ConfigureHardware.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\ConfigureHardware.c</FilePath>
+            </File>
+            <File>
+              <FileName>App.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\App.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -491,7 +521,7 @@
           <targetInfo name="TM4C123GH6PM"/>
         </targetInfos>
       </component>
-      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Heap" Cvariant="Heap_1" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Heap">
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Heap" Cvariant="Heap_4" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Heap">
         <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
         <targetInfos>
           <targetInfo name="TM4C123GH6PM"/>
