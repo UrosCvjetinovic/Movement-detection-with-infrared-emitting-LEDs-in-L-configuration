@@ -67,15 +67,15 @@ void ConfigureI2C(void)
     // Select the I2C function for these pins.
     GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
     GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
-    // Enable loopback mode.
-    //I2CLoopbackEnable(I2C0_BASE);
-    HWREG(I2C0_BASE + I2C_O_MCR) |= 0x01;
 	
 	   // Enable and initialize the I2C0 master module.  Use the system clock for
     // the I2C0 module.  The last parameter sets the I2C data transfer rate.
     // If false the data rate is set to 100kbps and if true the data rate will
     // be set to 400kbps.  For this example we will use a data rate of 100kbps.
     I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+		
+    // Enable the I2C0 master module.
+    I2CMasterEnable(I2C0_BASE);
 }
 
 void EnableI2C(void)

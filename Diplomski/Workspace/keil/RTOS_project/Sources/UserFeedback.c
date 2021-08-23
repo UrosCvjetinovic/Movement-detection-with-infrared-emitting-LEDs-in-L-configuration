@@ -60,3 +60,65 @@ void LedUserFeedbackProgress()
   Wait(100);
 	SetLED(0,0);
 }
+
+
+void write_hex(uint32_t data)
+{
+    uint8_t ui8temp;
+
+    ui8temp = '0';
+    UARTwrite(&ui8temp, 1);
+
+    ui8temp = 'x';
+    UARTwrite(&ui8temp, 1);
+
+    if (data & 0xFFFFFF00) {
+
+        if (data & 0xFFFF0000) {
+
+            if (data & 0xFF000000) {
+
+                ui8temp = ((data & 0xF0000000) >> 32) + 48;
+                if (ui8temp > 57)
+                    ui8temp += 7;
+                UARTwrite(&ui8temp, 1);
+
+                ui8temp = ((data & 0x0F000000) >> 28) + 48;
+                if (ui8temp > 57)
+                    ui8temp += 7;
+                UARTwrite(&ui8temp, 1);
+
+            }
+
+            ui8temp = ((data & 0xF00000) >> 24) + 48;
+            if (ui8temp > 57)
+                ui8temp += 7;
+            UARTwrite(&ui8temp, 1);
+
+            ui8temp = ((data & 0x0F0000) >> 16) + 48;
+            if (ui8temp > 57)
+                ui8temp += 7;
+            UARTwrite(&ui8temp, 1);
+        }
+
+        ui8temp = ((data & 0xF000) >> 12) + 48;
+        if (ui8temp > 57)
+            ui8temp += 7;
+        UARTwrite(&ui8temp, 1);
+
+        ui8temp = ((data & 0x0F00) >> 8) + 48;
+        if (ui8temp > 57)
+            ui8temp += 7;
+        UARTwrite(&ui8temp, 1);
+    }
+
+    ui8temp = ((data & 0xF0) >> 4) + 48;
+    if (ui8temp > 57)
+        ui8temp += 7;
+    UARTwrite(&ui8temp, 1);
+
+    ui8temp = (data & 0x0F) + 48;
+    if (ui8temp > 57)
+        ui8temp += 7;
+    UARTwrite(&ui8temp, 1);
+}

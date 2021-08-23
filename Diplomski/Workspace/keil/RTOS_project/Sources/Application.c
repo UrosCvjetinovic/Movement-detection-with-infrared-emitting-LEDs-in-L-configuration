@@ -4,88 +4,141 @@
 #include "UserFeedback.h"
 #include "Priorities.h"
 #include "Common.h"
+#include "ProximityClickApi.h"
 
 // Message Queue creation & usage
 #define MSGQUEUE_OBJECTS 16                     // number of Message Queue Objects
-osMessageQueueId_t mid_MsgQueue_UART_I2C;                // message queue id
-osMessageQueueId_t mid_MsgQueue_I2C_UART;                // message queue id
-osMessageQueueId_t mid_MsgQueue_INT_UART;                // message queue id
+osMessageQueueId_t mid_MsgQueue_SensorRead;                // message queue id
+osMessageQueueId_t mid_MsgQueue_UserInput;                // message queue id
  
 // thread id
-osThreadId_t tid_Thread_UART_TX;
-osThreadId_t tid_Thread_UART_RX;
-osThreadId_t tid_Thread_I2C_TX;
-osThreadId_t tid_Thread_I2C_RX;
+osThreadId_t tid_Thread_Communication;
+osThreadId_t tid_Thread_Read;
+osThreadId_t tid_Thread_Gesture;
 
+uint8_t running;
 
-void Thread_UART_RX(void *pvParameters)
+void Thread_Gesture(void *pvParameters)
 { 
-	uint8_t ui8Message;
-  osStatus_t status;
 	
-	while(1) {
-					toggleYellowLED();
-					UARTwrite("Entered UART RX \n", 19);
-    status = osMessageQueueGet(mid_MsgQueue_INT_UART, &ui8Message, NULL, osWaitForever);   // wait for message
-					UARTwrite("Passed UART RX block \n", 25);
-    if (status == osOK) {
-					UARTwrite("Passed2 UART RX block \n", 25);
-			osMessageQueuePut(mid_MsgQueue_UART_I2C, &ui8Message, 0U, osWaitForever);
-    }
+    uint16_t ui16Output = 0;
+    uint8_t ui8Diode = 0;
+    uint8_t arrayIndex = 0;
+    uint16_t rgi16SmallIR[5];
+    uint16_t rgi16MediumIR[5];
+    uint16_t rgi16LargeIR[5];
+		osStatus_t status;
+	
+		status = osThreadSetPriority(tid_Thread_Gesture, PRIORITY_GESTURE_THREAD);
+		if (status != osOK) {
+			UARTwrite("Thread priority not set\n", 25);
+		}
+		
+    while (1) {
+        if (running) {
+						UARTwrite("Thread Gesture\n", 25);
+						status = osMessageQueueGet(mid_MsgQueue_SensorRead, &ui16Output, NULL, osWaitForever);   // wait for message
+									UARTwrite("Passed UART RX block \n", 25);
+						UARTwrite("Thread Gesture\n", 25);
+						if (status == osOK) {
+							switch (ui8Diode) {
+									case 0:
+											rgi16SmallIR[arrayIndex++] = ui16Output;
+											ui8Diode++;
+											break;
+									case 1:
+											rgi16MediumIR[arrayIndex++] = ui16Output;
+											ui8Diode++;
+											break;
+									case 2:
+											rgi16LargeIR[arrayIndex++] = ui16Output;
+											ui8Diode++;
+											break;
+									default:
+											ui8Diode = 0;
+							}
+							if (arrayIndex > 4)
+									arrayIndex = 0;
+
+					}
+			}
 		osThreadYield();
 	}
 }
-void Thread_UART_TX(void *pvParameters)
+void Thread_Read(void *pvParameters)
 { 
-	uint8_t ui8Message;
-  osStatus_t status;
-	
-	while(1) {
-					toggleRedLED();
-					UARTwrite("Entered UART TX \n", 19);
-    status = osMessageQueueGet(mid_MsgQueue_I2C_UART, &ui8Message, NULL, osWaitForever);   // wait for message
-					UARTwrite("Passed UART TX block \n", 25);
-    if (status == osOK) {
-					UARTwrite("Passed2 UART TX block \n", 25);
-			UARTwrite("FromThreads: ", 14);
-			UARTwrite(&ui8Message, 1);
-					UARTwrite("\n", 3);
+    uint8_t ui8OutputAddr = 0;
+    uint8_t ui16Output = 0;
+		osStatus_t status;
+
+		status = osThreadSetPriority(tid_Thread_Read, PRIORITY_READ_THREAD);
+		if (status != osOK) {
+			UARTwrite("Thread priority not set\n", 25);
+		}
+		
+    while (1) {
+				UARTwrite("Thread Read\n", 25);
+				osThreadFlagsWait(0x1U, osFlagsWaitAny, osWaitForever);
+				UARTwrite("Thread Read\n", 25);
+
+        ui16Output = ReadOutput(ui8OutputAddr++);
+				osMessageQueuePut(mid_MsgQueue_SensorRead, &ui16Output, 0U, osWaitForever);
+        if (ui8OutputAddr  )
+
+        if (running)
+						osThreadFlagsSet(tid_Thread_Read, 0x1U);
+			osThreadYield();	
+
     }
-		osThreadYield();
-	}
 }
-void Thread_I2C_TX(void *pvParameters)
+void Thread_Communication(void *pvParameters)
 {
-	uint8_t ui8Message;
-  osStatus_t status;
 	
-	while (1) {
-					toggleYellowLED();
-					UARTwrite("Entered I2C TX \n", 18);
-    status = osMessageQueueGet(mid_MsgQueue_UART_I2C, &ui8Message, NULL, osWaitForever);   // wait for message
-					UARTwrite("Passed I2C TX block \n", 25);
-    if (status == osOK) {
-						UARTwrite("Passed2 I2C TX block \n", 25);
-			I2CMasterDataPut(I2C0_BASE, ui8Message);
-			I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
-			osThreadFlagsSet(tid_Thread_I2C_RX, 0x1U);
+    uint8_t ui8Message;
+    uint32_t ui32Request;
+		osStatus_t status;
+	
+		status = osThreadSetPriority(tid_Thread_Communication, PRIORITY_COM_THREAD);
+		if (status != osOK) {
+			UARTwrite("Thread priority not set\n", 25);
+		}
+    while (1) {
+        UARTwrite("\n\nCommands ( p - sensor info; a - arm/setup; s - start; c - stop )", 60);
+        UARTwrite("\nEnter command: ", 16);
+				status = osMessageQueueGet(mid_MsgQueue_UserInput, &ui8Message, NULL, osWaitForever);   // wait for message
+				if (status == osOK) {
+						switch (ui8Message) {
+								case 'p':
+										ui32Request = GetSpecs();
+										UARTwrite("\nSensor information:",20);
+										UARTwrite("\nPART ID is: ",20);
+										write_hex((ui32Request & 0xFF0000) >> 16);
+										UARTwrite("\nHARDWARE ID is: ",20);
+										write_hex((ui32Request & 0xFF00) >> 8);
+										UARTwrite("\nREV ID is: ",20);
+										write_hex(ui32Request & 0xFF);
+										break;
+								case 'a':
+										UARTwrite("\nSETING UP SENSOR...",20);
+										Setup();
+										UARTwrite("\n...SENSOR READY",20);
+										break;
+								case 's':
+										UARTwrite("\nPROGRAM STARTED... ",20);
+										Start();
+										running = 1;
+										osThreadFlagsSet(tid_Thread_Read, 0x1U);
+										break;
+								case 'c':
+										UARTwrite("\n...PROGRAM STOPED",20);
+										running = 0;
+										break;
+								default:
+										UARTwrite("\nNo command registered",20);
+						}
+					}
+			osThreadYield();
     }
-		osThreadYield();
-	}
-}
-void Thread_I2C_RX(void *pvParameters)
-{
-	uint8_t ui8Message;
-	
-	while (1) {
-				toggleRedLED();
-				UARTwrite("Entered I2C RX \n", 18);
-		osThreadFlagsWait(0x1U, osFlagsWaitAny, osWaitForever);
-				UARTwrite("Passed I2C RX block \n", 25);
-		ui8Message = I2CSlaveDataGet(I2C0_BASE);
-		osMessageQueuePut(mid_MsgQueue_I2C_UART, &ui8Message, 0U, osWaitForever);
-		osThreadYield();
-	}
 }
 
 int main_app(void) 
@@ -96,62 +149,39 @@ int main_app(void)
   osKernelInitialize(); 
   
   /* Create new thread */
-  tid_Thread_UART_TX = osThreadNew(Thread_UART_TX, NULL, NULL);
-  if (tid_Thread_UART_TX == NULL) {
+  tid_Thread_Communication = osThreadNew(Thread_Communication, NULL, NULL);
+  if (tid_Thread_Communication == NULL) {
     return(-1);
   }
-  tid_Thread_UART_RX = osThreadNew(Thread_UART_RX, NULL, NULL);
-  if (tid_Thread_UART_RX == NULL) {
+  tid_Thread_Read = osThreadNew(Thread_Read, NULL, NULL);
+  if (tid_Thread_Read == NULL) {
     return(-1);
   }
-  tid_Thread_I2C_TX = osThreadNew(Thread_I2C_TX, NULL, NULL);
-  if (tid_Thread_I2C_TX == NULL) {
-    return(-1);
-  }
-  tid_Thread_I2C_RX = osThreadNew(Thread_I2C_RX, NULL, NULL);
-  if (tid_Thread_I2C_RX == NULL) {
-    return(-1);
-  }  
-	// Set priority
-	status = osThreadSetPriority(tid_Thread_UART_TX, PRIORITY_THREAD_UART_TX);
-  if (status != osOK) {
-    return(-1);
-  }
-	status = osThreadSetPriority(tid_Thread_UART_RX, PRIORITY_THREAD_UART_RX);
-  if (status != osOK) {
-    return(-1);
-  }
-	status = osThreadSetPriority(tid_Thread_I2C_TX, PRIORITY_THREAD_I2C_TX);
-  if (status != osOK) {
-    return(-1);
-  }
-	status = osThreadSetPriority(tid_Thread_I2C_RX, PRIORITY_THREAD_I2C_RX);
-  if (status != osOK) {
+  tid_Thread_Gesture = osThreadNew(Thread_Gesture, NULL, NULL);
+  if (tid_Thread_Gesture == NULL) {
     return(-1);
   }
 	LedUserFeedbackProgress();
-	UARTwrite("Threads created\n", 17);
+	UARTwrite("Threads initialized\n", 22);
 	
-  mid_MsgQueue_INT_UART = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint8_t), NULL);
-  if (mid_MsgQueue_INT_UART == NULL) {
+  mid_MsgQueue_SensorRead = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint16_t), NULL);
+  if (mid_MsgQueue_SensorRead == NULL) {
     return(-1);
   }
-  mid_MsgQueue_I2C_UART = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint8_t), NULL);
-  if (mid_MsgQueue_I2C_UART == NULL) {
+	mid_MsgQueue_UserInput = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint8_t), NULL);
+  if (mid_MsgQueue_UserInput == NULL) {
     return(-1);
   }
-  mid_MsgQueue_UART_I2C = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint8_t), NULL);
-  if (mid_MsgQueue_UART_I2C == NULL) {
-    return(-1);
-  }
-	
 	LedUserFeedbackProgress();
-	UARTwrite("RTOS objects created\n", 23);
+	UARTwrite("CMSIS RTOS2 objects initialized\n", 27);
 	
 	
   /* Start thread execution */ 
   osKernelStart();
 	  
+	while(1);
+		
+	return 0;
 }
 
 void UART0_Handler(void)
@@ -166,14 +196,10 @@ void UART0_Handler(void)
 	// Receive
 	if (ui32Status & UART_INT_RX) {
 		if (UARTCharsAvail(UART0_BASE)) {
-			UARTwrite("FromInterrupt: ", 14);
 			ui8Message = UARTCharGet(UART0_BASE);
 			UARTwrite(&ui8Message, 1);
-			ui8Message = UARTCharGet(UART0_BASE);
-			UARTwrite(&ui8Message, 1);
-			UARTwrite("\n", 3);
-			osMessageQueuePut(mid_MsgQueue_INT_UART, &ui8Message, 0U, 0U);
-			osThreadResume(tid_Thread_UART_RX);
+			osMessageQueuePut(mid_MsgQueue_UserInput, &ui8Message, 0U, 0U);
+			osThreadResume(Thread_Communication);
 			UARTCharGetNonBlocking(UART0_BASE);
 		}
 	}

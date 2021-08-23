@@ -3,13 +3,12 @@
 
 //*****************************************************************************
 //
-// The priorities of the various tasks.
+// The priorities of the various threads.
 //
 //*****************************************************************************
-#define PRIORITY_THREAD_UART_TX       osPriorityNormal
-#define PRIORITY_THREAD_UART_RX       osPriorityLow
-#define PRIORITY_THREAD_I2C_TX        osPriorityBelowNormal
-#define PRIORITY_THREAD_I2C_RX        osPriorityAboveNormal
+#define PRIORITY_COM_THREAD            osPriorityAboveNormal
+#define PRIORITY_READ_THREAD           osPriorityNormal
+#define PRIORITY_GESTURE_THREAD        osPriorityLow
 
 
 #endif // __PRIORITIES_H__

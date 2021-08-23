@@ -10,4 +10,5 @@ void LedUserFeedbackStartup(void);
 void LedUserFeedbackProgress(void);
 void StartupTerminalOutput(void);
 void Wait(uint16_t timems);
+void write_hex(uint32_t data);
 #endif //USERFEEDBACK_H
