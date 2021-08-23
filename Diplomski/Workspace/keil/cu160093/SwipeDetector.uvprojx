@@ -10,6 +10,7 @@
       <TargetName>TM4C123GH6PM</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -140,7 +141,7 @@
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
+          <pFcarmGrp>Drivers</pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
           <FcArmLst>0</FcArmLst>
         </Utilities>
@@ -392,6 +393,86 @@
               <FileType>5</FileType>
               <FilePath>.\Source\Application.h</FilePath>
             </File>
+            <File>
+              <FileName>Application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Application.c</FilePath>
+            </File>
+            <File>
+              <FileName>Common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Common.h</FilePath>
+            </File>
+            <File>
+              <FileName>Communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Communication.c</FilePath>
+            </File>
+            <File>
+              <FileName>Communication.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Communication.h</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ConfigureHardware.c</FilePath>
+            </File>
+            <File>
+              <FileName>ConfigureHardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\ConfigureHardware.h</FilePath>
+            </File>
+            <File>
+              <FileName>Priorities.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Priorities.h</FilePath>
+            </File>
+            <File>
+              <FileName>ProximityClickApi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ProximityClickApi.c</FilePath>
+            </File>
+            <File>
+              <FileName>ProximityClickApi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\ProximityClickApi.h</FilePath>
+            </File>
+            <File>
+              <FileName>UserFeedback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\UserFeedback.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserFeedback.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\UserFeedback.h</FilePath>
+            </File>
+            <File>
+              <FileName>GestureAlgorithm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GestureAlgorithm.c</FilePath>
+            </File>
+            <File>
+              <FileName>GestureAlgorithm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GestureAlgorithm.h</FilePath>
+            </File>
+            <File>
+              <FileName>ReadThread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ReadThread.c</FilePath>
+            </File>
+            <File>
+              <FileName>ReadThread.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\ReadThread.h</FilePath>
+            </File>
+            <File>
+              <FileName>si115xRegisters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\si115xRegisters.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -517,6 +598,16 @@
               <FileType>5</FileType>
               <FilePath>.\Drivers\driverlib\systick.h</FilePath>
             </File>
+            <File>
+              <FileName>cpu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Drivers\driverlib\cpu.h</FilePath>
+            </File>
+            <File>
+              <FileName>cpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Drivers\driverlib\cpu.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -525,15 +616,61 @@
         <Group>
           <GroupName>::Device</GroupName>
         </Group>
+        <Group>
+          <GroupName>::RTOS</GroupName>
+        </Group>
       </Groups>
     </Target>
   </Targets>
 
   <RTE>
-    <apis/>
+    <apis>
+      <api Capiversion="2.1.3" Cclass="CMSIS" Cgroup="RTOS2" exclusive="1">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </api>
+    </apis>
     <components>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Config" Cvariant="CMSIS RTOS2" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Config CMSIS RTOS2">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Core" Cvariant="Cortex-M" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Core CM">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Event Groups" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Event Groups">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Heap" Cvariant="Heap_4" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Heap">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Timers" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Timers">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.5.0" condition="ARMv6_7_8-M Device">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.8.0"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </component>
+      <component Capiversion="2.1.3" Cclass="CMSIS" Cgroup="RTOS2" Csub="FreeRTOS" Cvariant="Cortex-M" Cvendor="ARM" Cversion="10.3.1" condition="CMSIS RTOS2 FreeRTOS CortexM">
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
         <targetInfos>
           <targetInfo name="TM4C123GH6PM"/>
         </targetInfos>
@@ -558,6 +695,14 @@
         <instance index="0">RTE\Device\TM4C123GH6PM\system_TM4C123.c</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="TM4C123x CMSIS"/>
         <package name="TM4C_DFP" schemaVersion="1.2" url="http://www.keil.com/pack/" vendor="Keil" version="1.1.0"/>
+        <targetInfos>
+          <targetInfo name="TM4C123GH6PM"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" condition="CoreM" name="CMSIS\RTOS2\FreeRTOS\Config\ARMCM\FreeRTOSConfig.h" version="10.2.0">
+        <instance index="0">RTE\RTOS\FreeRTOSConfig.h</instance>
+        <component Cbundle="FreeRTOS" Cclass="RTOS" Cgroup="Config" Cvariant="CMSIS RTOS2" Cvendor="ARM" Cversion="10.3.1" condition="FreeRTOS Config CMSIS RTOS2"/>
+        <package name="CMSIS-FreeRTOS" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="ARM" version="10.3.1"/>
         <targetInfos>
           <targetInfo name="TM4C123GH6PM"/>
         </targetInfos>
