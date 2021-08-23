@@ -96,11 +96,11 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
     int8_t   ui8RetVal;
     uint8_t  ui8Count = 0;
 
-    UARTprintf("\n----- send CMD -----");
+    UARTwrite("\n----- send CMD -----", 25);
 
     ui16Response = Si115xGetResponse0(ui8SensorAddr);
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(ui16Response);
     if(ui16Response < 0) {
         return ui16Response;
@@ -108,7 +108,7 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
 
     ui16Response = ui16Response & RSP0_COUNTER_MASK;
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(ui16Response);
 
     while(ui8Count < 5) {
@@ -130,10 +130,10 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
         ui8Count++;
     }
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(Si115xGetResponse0(ui8SensorAddr));
 
-    UARTprintf("\n==Upisujem komandu");
+    UARTwrite("\n==Upisujem komandu", 15);
     Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, ui8Command);
 
     ui8Count = 0;
@@ -143,7 +143,7 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
             break;
 
         ui8RetVal = Si115xGetResponse0(ui8SensorAddr);
-        UARTprintf("\nRESPONSE 0 = ");
+        UARTwrite("\nRESPONSE 0 = ", 15);
         write_hex(ui8RetVal);
 
         if((ui8RetVal & RSP0_COUNTER_MASK) != ui16Response)
@@ -221,51 +221,51 @@ void Si115xParamSet(uint8_t ui8SensorAddr, uint8_t ui8AddrParam, uint8_t ui8Data
 {
     uint8_t temp;
 
-    UARTprintf("\n----- USO Param Set -----");
+    UARTwrite("\n----- USO Param Set -----", 45);
     temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
     // Wait until sleep
     while (!(temp & RSP0_SLEEP)){
-        UARTprintf("\nUSO u prvi while:");
+        //UARTwrite("\nWait until sleep:", 15);
         temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
     }
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
     // CMD_ERR
     if(temp & 0x10) {
-        UARTprintf("\nUSO u prvi if:");
+        UARTwrite("\nError happend:", 15);
         Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, CMD_NOP);
         while(temp & 0xDF) {
-            UARTprintf("\nUSO u drugi while:");
+            UARTwrite("\nUSO u drugi while:", 15);
             temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
         }
     }
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
 
     ui8AddrParam = CMD_PARAM_SET | (ui8AddrParam & 0x3F);
 
-    UARTprintf("\nCOMMAND =");
+    UARTwrite("\nCOMMAND =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTprintf("\nHOSTIN0 =");
+    UARTwrite("\nHOSTIN0 =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
 
     Si115xWriteToRegister(ui8SensorAddr, HOSTIN_0_REG, ui8Data);
     Si115xWriteToRegister(ui8SensorAddr, COMMAND_REG, ui8AddrParam);
 
-    UARTprintf("\nCOMMAND =");
+    UARTwrite("\nCOMMAND =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTprintf("\nHOSTIN0 =");
+    UARTwrite("\nHOSTIN0 =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
 
     while( (temp & RSP0_COUNTER_MASK) == (Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0) & 0x1f) );
-    UARTprintf("\n----IZASAO IZ PARAM SET----");
+    UARTwrite("\n----IZASAO IZ PARAM SET----", 15);
 
 }
 
@@ -273,83 +273,83 @@ uint8_t Si115xParamRead(uint8_t ui8SensorAddr, uint8_t ui8AddrParam)
 {
     uint8_t temp;
 
-    UARTprintf("\n-----USO Param READ------");
+    UARTwrite("\n-----USO Param READ------", 45);
 
     temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
     while (!(temp & RSP0_SLEEP)) {
         temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-        UARTprintf("\nUSO u prvi while:");
+        //UARTwrite("\nWait for sleep", 19);
     }
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
     if(temp & 0x10) {
-        UARTprintf("\nUSO u prvi if:");
+        UARTwrite("\nError:", 15);
         Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, CMD_NOP);
         while(temp & 0xDF) {
-            UARTprintf("\nUSO u drugi while:");
+            UARTwrite("\nUSO u drugi while:", 15);
             temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
         }
     }
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
 
     ui8AddrParam = CMD_PARAM_QUERY + (ui8AddrParam & 0x3F);
 
-    UARTprintf("\nCOMMAND =");
+    UARTwrite("\nCOMMAND =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTprintf("\nHOSTIN0 =");
+    UARTwrite("\nHOSTIN0 =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
 
     Si115xWriteToRegister(ui8SensorAddr, COMMAND_REG, ui8AddrParam);
 
-    UARTprintf("\nCOMMAND =");
+    UARTwrite("\nCOMMAND =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTprintf("\nHOSTIN0 =");
+    UARTwrite("\nHOSTIN0 =", 15);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
 
-    UARTprintf("\nRESPONSE 0 = ");
+    UARTwrite("\nRESPONSE 0 = ", 15);
     write_hex(temp);
 
     while( (temp & RSP0_COUNTER_MASK) == (Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0) & 0x1f) );
 
-    UARTprintf("\n----IZASAO IZ PARAM READ----");
+    UARTwrite("\n----IZASAO IZ PARAM READ----", 35);
     return Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE1);
 }
 
 void Setup(void)
 {
+    UARTwrite("\nSend Nop command ",20);
     Si115xNop(PROXIMITY_ADR);
-    UARTprintf("\nCOMMAND =");
+    UARTwrite("\nCOMMAND 0x0B =",20);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTprintf("\nHOSTIN0 =");
+    UARTwrite("\nHOSTIN0 0x0A=",20);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
-    UARTprintf("\nRESPONSE0 =");
+    UARTwrite("\nRESPONSE0 0x11=",20);
     write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_RESPONSE0));
 
-    UARTprintf("\nUSO:");
-    UARTprintf("\nParam read:");
+    UARTwrite("\nCheck init ChanList:",20);
+    UARTwrite("\nChan List =",20);
     write_hex(Si115xParamRead(PROXIMITY_ADR, CHAN_LIST));
-    UARTprintf("\nPROSO:");
 
-    UARTprintf("\nUSO:");
+		UARTwrite("\nSet ChanList := 0x07",25);
     Si115xParamSet(PROXIMITY_ADR, CHAN_LIST, 0x07);
-    UARTprintf("\nParam read (RESPONSE1 = ");
+    UARTwrite("\n(RESPONSE1) ChanList = ",20);
     write_hex(Si115xParamRead(PROXIMITY_ADR, CHAN_LIST));
-    UARTprintf("\nPROSO:");
+    UARTwrite("\nChanList passed:",20);
 
-    //Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_0, SMALL_IR);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_0, 0);
+    UARTwrite("\nSeting SMALL_IR:",20);
+    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_0, 0);	//SMALL_IR
     Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_0, MEASCOUNT_0);
 
-    //Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_1, MEDIUM_IR);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_1, 1);
+    UARTwrite("\nSeting MEDIUM_IR:",20);
+    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_1, 1);	//MEDIUM_IR
     Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_1, MEASCOUNT_1);
 
-    //Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_2, LARGE_IR);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_2, 2);
+    UARTwrite("\nSeting LARGE_IR:",20);
+    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_2, 2);	//LARGE_IR
     Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_2, MEASCOUNT_2);
 
 }
@@ -360,9 +360,9 @@ uint16_t ReadOutput(uint8_t ui8Addr)
 
     ch = Si115xReadFromRegister(PROXIMITY_ADR, HOSTOUT_0 + ui8Addr);
     ch = Si115xReadFromRegister(PROXIMITY_ADR, HOSTOUT_0 + 1 + ui8Addr) << 8;
-    UARTprintf("\nREAD OUTPUT:");
+    UARTwrite("\nREAD OUTPUT:", 15);
     write_hex(ch);
-    UARTprintf(" ");
+    UARTwrite(" ",2);
 
     return ch;
 }

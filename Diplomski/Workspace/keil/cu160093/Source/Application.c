@@ -103,9 +103,8 @@ void Thread_Communication(void *pvParameters)
 			UARTwrite("Thread priority not set\n", 25);
 		}
     while (1) {
-				UARTwrite("Comm\n", 25);
         UARTwrite("\n\nCommands ( p - sensor info; a - arm/setup; s - start; c - stop )", 60);
-        UARTwrite("\nEnter command: ", 14);
+        UARTwrite("\nEnter command: ", 16);
 				status = osMessageQueueGet(mid_MsgQueue_UserInput, &ui8Message, NULL, osWaitForever);   // wait for message
 				if (status == osOK) {
 						switch (ui8Message) {
