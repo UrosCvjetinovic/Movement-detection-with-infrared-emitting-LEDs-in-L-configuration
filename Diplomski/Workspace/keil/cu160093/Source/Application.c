@@ -16,12 +16,11 @@ osThreadId_t tid_Thread_Communication;
 osThreadId_t tid_Thread_Read;
 osThreadId_t tid_Thread_Gesture;
 
-uint8_t running;
+osTimerId_t periodic_id;
 
 void Thread_Gesture(void *pvParameters)
 { 
-	
-    uint16_t ui16Output = 0;
+    uint16_t ui16Output [3];
     uint8_t ui8Diode = 0;
     uint8_t arrayIndex = 0;
     uint16_t rgi16SmallIR[5];
@@ -35,40 +34,32 @@ void Thread_Gesture(void *pvParameters)
 		}
 		
     while (1) {
-        if (running) {
-						UARTwrite("Thread Gesture\n", 25);
-						status = osMessageQueueGet(mid_MsgQueue_SensorRead, &ui16Output, NULL, osWaitForever);   // wait for message
-									UARTwrite("Passed UART RX block \n", 25);
-						UARTwrite("Thread Gesture\n", 25);
-						if (status == osOK) {
-							switch (ui8Diode) {
-									case 0:
-											rgi16SmallIR[arrayIndex++] = ui16Output;
-											ui8Diode++;
-											break;
-									case 1:
-											rgi16MediumIR[arrayIndex++] = ui16Output;
-											ui8Diode++;
-											break;
-									case 2:
-											rgi16LargeIR[arrayIndex++] = ui16Output;
-											ui8Diode++;
-											break;
-									default:
-											ui8Diode = 0;
-							}
-							if (arrayIndex > 4)
-									arrayIndex = 0;
-
+				status = osMessageQueueGet(mid_MsgQueue_SensorRead, ui16Output, NULL, osWaitForever);   // wait for message
+				if (status == osOK) {
+					
+						UARTwrite("Small diode = ", 25);
+						write_hex(ui16Output[0]);
+						UARTwrite("\n", 3);
+						rgi16SmallIR[arrayIndex] = ui16Output[0];
+						UARTwrite("Medium diode =", 25);
+						write_hex(ui16Output[1]);
+						UARTwrite("\n", 3);
+						rgi16MediumIR[arrayIndex] = ui16Output[1];
+						UARTwrite("Large diode = ", 25);
+						write_hex(ui16Output[2]);
+						UARTwrite("\n", 3);
+						rgi16LargeIR[arrayIndex++] = ui16Output[2];
 					}
+			if (arrayIndex > 4)
+					arrayIndex = 0;
+			osThreadYield();
+
 			}
-		osThreadYield();
-	}
 }
 void Thread_Read(void *pvParameters)
 { 
-    uint8_t ui8OutputAddr = 0;
-    uint8_t ui16Output = 0;
+    uint16_t ui16Output = 0;
+		uint16_t auiDiodeValue [3];
 		osStatus_t status;
 
 		status = osThreadSetPriority(tid_Thread_Read, PRIORITY_READ_THREAD);
@@ -77,18 +68,22 @@ void Thread_Read(void *pvParameters)
 		}
 		
     while (1) {
-				UARTwrite("Thread Read\n", 25);
 				osThreadFlagsWait(0x1U, osFlagsWaitAny, osWaitForever);
-				UARTwrite("Thread Read\n", 25);
+				StartMessuring();
+			
+        ui16Output = ReadOutput(0);
+				auiDiodeValue[0] = ui16Output;
+			
+        ui16Output = ReadOutput(2);
+				auiDiodeValue[1] = ui16Output;
+			
+        ui16Output = ReadOutput(4);
+				auiDiodeValue[2] = ui16Output;
+				
+				osMessageQueuePut(mid_MsgQueue_SensorRead, auiDiodeValue, 0U, osWaitForever);
+        //if (ui8OutputAddr  )
 
-        ui16Output = ReadOutput(ui8OutputAddr++);
-				osMessageQueuePut(mid_MsgQueue_SensorRead, &ui16Output, 0U, osWaitForever);
-        if (ui8OutputAddr  )
-
-        if (running)
-						osThreadFlagsSet(tid_Thread_Read, 0x1U);
-			osThreadYield();	
-
+				osThreadYield();	
     }
 }
 void Thread_Communication(void *pvParameters)
@@ -125,13 +120,18 @@ void Thread_Communication(void *pvParameters)
 										break;
 								case 's':
 										UARTwrite("\nPROGRAM STARTED... ",20);
-										Start();
-										running = 1;
-										osThreadFlagsSet(tid_Thread_Read, 0x1U);
+										status = osTimerStart(periodic_id, 500U);
+										if (status != osOK) {
+											// Timer could not be stopped
+										}
 										break;
 								case 'c':
 										UARTwrite("\n...PROGRAM STOPED",20);
-										running = 0;
+										osTimerDelete(periodic_id);
+										status = osTimerStop(periodic_id);                     // stop timer
+										if (status != osOK) {
+											// Timer could not be stopped
+										}
 										break;
 								default:
 										UARTwrite("\nNo command registered",20);
@@ -141,10 +141,19 @@ void Thread_Communication(void *pvParameters)
     }
 }
 
+static void periodic_Callback (void *argument) {
+  //int32_t arg = (int32_t)argument; // cast back argument '5'
+  // do something, i.e. set thread/event flags
+	osThreadFlagsSet(tid_Thread_Read, 0x1U);
+}
+
 int main_app(void) 
 {
   osStatus_t status;
 	
+	// creates a periodic timer:
+	periodic_id = osTimerNew(periodic_Callback, osTimerPeriodic, (void *)5, NULL); // (void*)5 is passed as an argument
+                                                                               // to the callback function
   /* Initialize CMSIS-RTOS2 */
   osKernelInitialize(); 
   
@@ -164,7 +173,7 @@ int main_app(void)
 	LedUserFeedbackProgress();
 	UARTwrite("Threads initialized\n", 22);
 	
-  mid_MsgQueue_SensorRead = osMessageQueueNew(MSGQUEUE_OBJECTS, sizeof(uint16_t), NULL);
+  mid_MsgQueue_SensorRead = osMessageQueueNew(MSGQUEUE_OBJECTS, 3*sizeof(uint16_t), NULL);
   if (mid_MsgQueue_SensorRead == NULL) {
     return(-1);
   }
@@ -173,7 +182,7 @@ int main_app(void)
     return(-1);
   }
 	LedUserFeedbackProgress();
-	UARTwrite("CMSIS RTOS2 objects initialized\n", 27);
+	UARTwrite("CMSIS RTOS2 objects initialized\n", 32);
 	
 	
   /* Start thread execution */ 
@@ -199,7 +208,7 @@ void UART0_Handler(void)
 			ui8Message = UARTCharGet(UART0_BASE);
 			UARTwrite(&ui8Message, 1);
 			osMessageQueuePut(mid_MsgQueue_UserInput, &ui8Message, 0U, 0U);
-			osThreadResume(Thread_Communication);
+			//osThreadResume(Thread_Communication);
 			UARTCharGetNonBlocking(UART0_BASE);
 		}
 	}

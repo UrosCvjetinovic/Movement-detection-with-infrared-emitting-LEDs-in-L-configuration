@@ -96,20 +96,13 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
     int8_t   ui8RetVal;
     uint8_t  ui8Count = 0;
 
-    UARTwrite("\n----- send CMD -----", 25);
-
     ui16Response = Si115xGetResponse0(ui8SensorAddr);
 
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(ui16Response);
     if(ui16Response < 0) {
         return ui16Response;
     }
 
     ui16Response = ui16Response & RSP0_COUNTER_MASK;
-
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(ui16Response);
 
     while(ui8Count < 5) {
         if((ui8RetVal = _waitUntilSleep(ui8SensorAddr)) != 0)
@@ -130,10 +123,6 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
         ui8Count++;
     }
 
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(Si115xGetResponse0(ui8SensorAddr));
-
-    UARTwrite("\n==Upisujem komandu", 15);
     Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, ui8Command);
 
     ui8Count = 0;
@@ -143,8 +132,6 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
             break;
 
         ui8RetVal = Si115xGetResponse0(ui8SensorAddr);
-        UARTwrite("\nRESPONSE 0 = ", 15);
-        write_hex(ui8RetVal);
 
         if((ui8RetVal & RSP0_COUNTER_MASK) != ui16Response)
             break;
@@ -221,51 +208,26 @@ void Si115xParamSet(uint8_t ui8SensorAddr, uint8_t ui8AddrParam, uint8_t ui8Data
 {
     uint8_t temp;
 
-    UARTwrite("\n----- USO Param Set -----", 45);
     temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
     // Wait until sleep
     while (!(temp & RSP0_SLEEP)){
-        //UARTwrite("\nWait until sleep:", 15);
         temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
     }
 
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
     // CMD_ERR
     if(temp & 0x10) {
-        UARTwrite("\nError happend:", 15);
         Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, CMD_NOP);
         while(temp & 0xDF) {
-            UARTwrite("\nUSO u drugi while:", 15);
             temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
         }
     }
 
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
-
     ui8AddrParam = CMD_PARAM_SET | (ui8AddrParam & 0x3F);
-
-    UARTwrite("\nCOMMAND =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTwrite("\nHOSTIN0 =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
 
     Si115xWriteToRegister(ui8SensorAddr, HOSTIN_0_REG, ui8Data);
     Si115xWriteToRegister(ui8SensorAddr, COMMAND_REG, ui8AddrParam);
 
-    UARTwrite("\nCOMMAND =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTwrite("\nHOSTIN0 =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
-
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
-
     while( (temp & RSP0_COUNTER_MASK) == (Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0) & 0x1f) );
-    UARTwrite("\n----IZASAO IZ PARAM SET----", 15);
 
 }
 
@@ -273,84 +235,71 @@ uint8_t Si115xParamRead(uint8_t ui8SensorAddr, uint8_t ui8AddrParam)
 {
     uint8_t temp;
 
-    UARTwrite("\n-----USO Param READ------", 45);
-
     temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
     while (!(temp & RSP0_SLEEP)) {
         temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
-        //UARTwrite("\nWait for sleep", 19);
     }
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
+		
     if(temp & 0x10) {
-        UARTwrite("\nError:", 15);
         Si115xWriteToRegister(ui8SensorAddr, SI115x_REG_COMMAND, CMD_NOP);
         while(temp & 0xDF) {
-            UARTwrite("\nUSO u drugi while:", 15);
             temp = Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0);
         }
     }
 
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
-
     ui8AddrParam = CMD_PARAM_QUERY + (ui8AddrParam & 0x3F);
-
-    UARTwrite("\nCOMMAND =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTwrite("\nHOSTIN0 =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
-
     Si115xWriteToRegister(ui8SensorAddr, COMMAND_REG, ui8AddrParam);
-
-    UARTwrite("\nCOMMAND =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTwrite("\nHOSTIN0 =", 15);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
-
-    UARTwrite("\nRESPONSE 0 = ", 15);
-    write_hex(temp);
 
     while( (temp & RSP0_COUNTER_MASK) == (Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE0) & 0x1f) );
 
-    UARTwrite("\n----IZASAO IZ PARAM READ----", 35);
     return Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE1);
+}
+
+uint8_t writeWithCheckParam(uint8_t ui8AddrParam, uint8_t ui8Data)
+{
+		uint8_t valueInSensorReg = 0;
+    Si115xParamSet(PROXIMITY_ADR, ui8AddrParam, ui8Data);
+    valueInSensorReg = Si115xParamRead(PROXIMITY_ADR, ui8AddrParam);
+	
+    return valueInSensorReg == ui8Data;
 }
 
 void Setup(void)
 {
-    UARTwrite("\nSend Nop command ",20);
     Si115xNop(PROXIMITY_ADR);
-    UARTwrite("\nCOMMAND 0x0B =",20);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_COMMAND));
-    UARTwrite("\nHOSTIN0 0x0A=",20);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_HOSTIN0));
-    UARTwrite("\nRESPONSE0 0x11=",20);
-    write_hex(Si115xReadFromRegister(PROXIMITY_ADR, SI115x_REG_RESPONSE0));
+		if(!writeWithCheckParam(CHAN_LIST, 0x07)) {
+				UARTwrite("Small diode adr not set correctly",26);
+		}
+		
+		if(!writeWithCheckParam(ADCCONFIG_0, 0)) {
+				UARTwrite("Small diode adr not set correctly",26);
+		}
+		if(!writeWithCheckParam(ADCSENS_0, 0x0)) {
+				UARTwrite("Small diode sens not set correctly",26);
+		}
+		if(!writeWithCheckParam(MEASCONFIG_0, 1)) {
+				UARTwrite("Small diode conf not set correctly",26);
+		}
 
-    UARTwrite("\nCheck init ChanList:",20);
-    UARTwrite("\nChan List =",20);
-    write_hex(Si115xParamRead(PROXIMITY_ADR, CHAN_LIST));
-
-		UARTwrite("\nSet ChanList := 0x07",25);
-    Si115xParamSet(PROXIMITY_ADR, CHAN_LIST, 0x07);
-    UARTwrite("\n(RESPONSE1) ChanList = ",20);
-    write_hex(Si115xParamRead(PROXIMITY_ADR, CHAN_LIST));
-    UARTwrite("\nChanList passed:",20);
-
-    UARTwrite("\nSeting SMALL_IR:",20);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_0, 0);	//SMALL_IR
-    Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_0, MEASCOUNT_0);
-
-    UARTwrite("\nSeting MEDIUM_IR:",20);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_1, 1);	//MEDIUM_IR
-    Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_1, MEASCOUNT_1);
-
-    UARTwrite("\nSeting LARGE_IR:",20);
-    Si115xParamSet(PROXIMITY_ADR, ADCCONFIG_2, 2);	//LARGE_IR
-    Si115xParamSet(PROXIMITY_ADR, MEASCONFIG_2, MEASCOUNT_2);
+		if(!writeWithCheckParam(ADCCONFIG_1, 1)) {
+				UARTwrite("Medium diode adr not set correctly",26);
+		}
+		if(!writeWithCheckParam(ADCSENS_1, 0x0)) {
+				UARTwrite("Medium diode sens not set correctly",26);
+		}
+		if(!writeWithCheckParam(MEASCONFIG_1, 4)) {
+				UARTwrite("Medium diode adr not set correctly",26);
+		}
+		
+		if(!writeWithCheckParam(ADCCONFIG_2, 2)) {
+				UARTwrite("Large diode adr not set correctly",26);
+		}
+		if(!writeWithCheckParam(ADCSENS_2, 0x0)) {
+				UARTwrite("Large diode sens not set correctly",26);
+		}
+		if(!writeWithCheckParam(MEASCONFIG_2, 2)) {
+				UARTwrite("Large diode adr not set correctly",26);
+		}
 
 }
 
@@ -359,12 +308,14 @@ uint16_t ReadOutput(uint8_t ui8Addr)
     uint16_t ch = 0x0000;
 
     ch = Si115xReadFromRegister(PROXIMITY_ADR, HOSTOUT_0 + ui8Addr);
-    ch = Si115xReadFromRegister(PROXIMITY_ADR, HOSTOUT_0 + 1 + ui8Addr) << 8;
-    UARTwrite("\nREAD OUTPUT:", 15);
-    write_hex(ch);
-    UARTwrite(" ",2);
+    ch = (ch << 8) + Si115xReadFromRegister(PROXIMITY_ADR, HOSTOUT_0 + 1 + ui8Addr);
 
     return ch;
+}
+
+void StartMessuring(void)
+{
+    Si115xForce(PROXIMITY_ADR);
 }
 
 void Start(void)
