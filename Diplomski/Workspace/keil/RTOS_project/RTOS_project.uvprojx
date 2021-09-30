@@ -474,9 +474,64 @@
               <FilePath>.\Sources\ConfigureHardware.c</FilePath>
             </File>
             <File>
-              <FileName>App.c</FileName>
+              <FileName>si115xRegisters.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\si115xRegisters.h</FilePath>
+            </File>
+            <File>
+              <FileName>ReadThread.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\ReadThread.h</FilePath>
+            </File>
+            <File>
+              <FileName>ReadThread.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Sources\App.c</FilePath>
+              <FilePath>.\Sources\ReadThread.c</FilePath>
+            </File>
+            <File>
+              <FileName>ProximityClickApi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\ProximityClickApi.h</FilePath>
+            </File>
+            <File>
+              <FileName>ProximityClickApi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\ProximityClickApi.c</FilePath>
+            </File>
+            <File>
+              <FileName>GestureAlgorithm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\GestureAlgorithm.h</FilePath>
+            </File>
+            <File>
+              <FileName>GestureAlgorithm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\GestureAlgorithm.c</FilePath>
+            </File>
+            <File>
+              <FileName>Communication.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\Communication.h</FilePath>
+            </File>
+            <File>
+              <FileName>Communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\Communication.c</FilePath>
+            </File>
+            <File>
+              <FileName>Common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Sources\Common.h</FilePath>
+            </File>
+            <File>
+              <FileName>Common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\Common.c</FilePath>
+            </File>
+            <File>
+              <FileName>Application.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Sources\Application.c</FilePath>
             </File>
           </Files>
         </Group>

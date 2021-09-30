@@ -23,9 +23,9 @@ void Thread_Gesture(void *pvParameters)
     uint16_t ui16Output [3];
     uint8_t ui8Diode = 0;
     uint8_t arrayIndex = 0;
-    uint16_t rgi16SmallIR[5];
-    uint16_t rgi16MediumIR[5];
-    uint16_t rgi16LargeIR[5];
+    uint16_t rgi16IR1[5];
+    uint16_t rgi16IR2[5];
+    uint16_t rgi16IR3[5];
 		osStatus_t status;
 	
 		status = osThreadSetPriority(tid_Thread_Gesture, PRIORITY_GESTURE_THREAD);
@@ -36,19 +36,9 @@ void Thread_Gesture(void *pvParameters)
     while (1) {
 				status = osMessageQueueGet(mid_MsgQueue_SensorRead, ui16Output, NULL, osWaitForever);   // wait for message
 				if (status == osOK) {
-					
-						UARTwrite("Small diode = ", 25);
-						write_hex(ui16Output[0]);
-						UARTwrite("\n", 3);
-						rgi16SmallIR[arrayIndex] = ui16Output[0];
-						UARTwrite("Medium diode =", 25);
-						write_hex(ui16Output[1]);
-						UARTwrite("\n", 3);
-						rgi16MediumIR[arrayIndex] = ui16Output[1];
-						UARTwrite("Large diode = ", 25);
-						write_hex(ui16Output[2]);
-						UARTwrite("\n", 3);
-						rgi16LargeIR[arrayIndex++] = ui16Output[2];
+						rgi16IR1[arrayIndex] = ui16Output[0];
+						rgi16IR2[arrayIndex] = ui16Output[1];
+						rgi16IR3[arrayIndex++] = ui16Output[2];
 					}
 			if (arrayIndex > 4)
 					arrayIndex = 0;
@@ -70,15 +60,25 @@ void Thread_Read(void *pvParameters)
     while (1) {
 				osThreadFlagsWait(0x1U, osFlagsWaitAny, osWaitForever);
 				StartMessuring();
+				Wait(50);
 			
         ui16Output = ReadOutput(0);
 				auiDiodeValue[0] = ui16Output;
+						UARTwrite("IR1 diode = ", 25);
+						write_hex(ui16Output);
+						UARTwrite("\n", 3);
 			
         ui16Output = ReadOutput(2);
 				auiDiodeValue[1] = ui16Output;
+						UARTwrite("IR2 diode = ", 25);
+						write_hex(ui16Output);
+						UARTwrite("\n", 3);
 			
         ui16Output = ReadOutput(4);
 				auiDiodeValue[2] = ui16Output;
+						UARTwrite("IR3 diode = ", 25);
+						write_hex(ui16Output);
+						UARTwrite("\n", 3);
 				
 				osMessageQueuePut(mid_MsgQueue_SensorRead, auiDiodeValue, 0U, osWaitForever);
         //if (ui8OutputAddr  )
@@ -98,7 +98,7 @@ void Thread_Communication(void *pvParameters)
 			UARTwrite("Thread priority not set\n", 25);
 		}
     while (1) {
-        UARTwrite("\n\nCommands ( p - sensor info; a - arm/setup; s - start; c - stop )", 60);
+        UARTwrite("\n\nCommands ( p - sensor info; d - setup daytime; n - setup nighttime; s - start; c - stop )", 95);
         UARTwrite("\nEnter command: ", 16);
 				status = osMessageQueueGet(mid_MsgQueue_UserInput, &ui8Message, NULL, osWaitForever);   // wait for message
 				if (status == osOK) {
@@ -113,14 +113,19 @@ void Thread_Communication(void *pvParameters)
 										UARTwrite("\nREV ID is: ",20);
 										write_hex(ui32Request & 0xFF);
 										break;
-								case 'a':
+								case 'd':
 										UARTwrite("\nSETING UP SENSOR...",20);
-										Setup();
+										Setup(0x07);
+										UARTwrite("\n...SENSOR READY",20);
+										break;
+								case 'n':
+										UARTwrite("\nSETING UP SENSOR...",20);
+										Setup(0x0A);
 										UARTwrite("\n...SENSOR READY",20);
 										break;
 								case 's':
 										UARTwrite("\nPROGRAM STARTED... ",20);
-										status = osTimerStart(periodic_id, 500U);
+										status = osTimerStart(periodic_id, 520U);
 										if (status != osOK) {
 											// Timer could not be stopped
 										}
@@ -134,7 +139,7 @@ void Thread_Communication(void *pvParameters)
 										}
 										break;
 								default:
-										UARTwrite("\nNo command registered",20);
+										UARTwrite("\nNo command registered",22);
 						}
 					}
 			osThreadYield();

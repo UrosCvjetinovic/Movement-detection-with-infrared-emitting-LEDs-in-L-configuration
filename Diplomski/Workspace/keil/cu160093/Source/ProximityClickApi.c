@@ -74,7 +74,7 @@ static uint8_t Si115xGetResponse1(uint8_t ui8SensorAddr)
     return Si115xReadFromRegister(ui8SensorAddr, SI115x_REG_RESPONSE1);
 }
 
-static int16_t _waitUntilSleep(uint8_t ui8SensorAddr)
+static int16_t Si115xWaitUntilSleep(uint8_t ui8SensorAddr)
 {
     int16_t ui16RetVal = -1;
     uint8_t ui8Count = 0;
@@ -90,7 +90,7 @@ static int16_t _waitUntilSleep(uint8_t ui8SensorAddr)
     return 0;
 }
 
-static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
+static int16_t Si115xSendCommand(uint8_t ui8SensorAddr, uint8_t ui8Command)
 {
     int16_t  ui16Response;
     int8_t   ui8RetVal;
@@ -105,7 +105,7 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
     ui16Response = ui16Response & RSP0_COUNTER_MASK;
 
     while(ui8Count < 5) {
-        if((ui8RetVal = _waitUntilSleep(ui8SensorAddr)) != 0)
+        if((ui8RetVal =	Si115xWaitUntilSleep(ui8SensorAddr)) != 0)
             return ui8RetVal;
 
         if(ui8Command == 0)
@@ -145,22 +145,22 @@ static int16_t _sendCmd(uint8_t ui8SensorAddr, uint8_t ui8Command)
 
 static int16_t Si115xStart(uint8_t ui8SensorAddr)
 {
-    return _sendCmd(ui8SensorAddr, START);
+    return Si115xSendCommand(ui8SensorAddr, START);
 }
 
 static int16_t Si115xNop(uint8_t ui8SensorAddr)
 {
-    return _sendCmd(ui8SensorAddr, CMD_NOP);
+    return Si115xSendCommand(ui8SensorAddr, CMD_NOP);
 }
 
 static int16_t Si115xForce(uint8_t ui8SensorAddr)
 {
-    return _sendCmd(ui8SensorAddr, CMD_FORCE_CH);
+    return Si115xSendCommand(ui8SensorAddr, CMD_FORCE_CH);
 }
 
-static int16_t _Pause (uint8_t ui8SensorAddr)
+static int16_t _pause (uint8_t ui8SensorAddr)
 {
-    return _sendCmd(ui8SensorAddr, CMD_PAUSE_CH);
+    return Si115xSendCommand(ui8SensorAddr, CMD_PAUSE_CH);
 }
 
 int16_t Si115xPause(uint8_t ui8SensorAddr)
@@ -186,7 +186,7 @@ int16_t Si115xPause(uint8_t ui8SensorAddr)
             ui8CountB++;
         }
 
-        _Pause(ui8SensorAddr);
+        _pause(ui8SensorAddr);
 
         ui8CountB = 0;
         while(ui8CountB < 5) {
@@ -264,41 +264,44 @@ uint8_t writeWithCheckParam(uint8_t ui8AddrParam, uint8_t ui8Data)
     return valueInSensorReg == ui8Data;
 }
 
-void Setup(void)
+void Setup(uint16_t ambientLight)
 {
     Si115xNop(PROXIMITY_ADR);
 		if(!writeWithCheckParam(CHAN_LIST, 0x07)) {
-				UARTwrite("Small diode adr not set correctly",26);
+				UARTwrite("Chan list not set",26);
 		}
 		
-		if(!writeWithCheckParam(ADCCONFIG_0, 0)) {
-				UARTwrite("Small diode adr not set correctly",26);
+		//IR1
+		if(!writeWithCheckParam(ADCCONFIG_0, 2)) {
+				UARTwrite("IR1 diode adr not set correctly",26);
 		}
-		if(!writeWithCheckParam(ADCSENS_0, 0x0)) {
-				UARTwrite("Small diode sens not set correctly",26);
+		if(!writeWithCheckParam(ADCSENS_0, ambientLight)) {
+				UARTwrite("IR1 diode sens not set correctly",26);
 		}
 		if(!writeWithCheckParam(MEASCONFIG_0, 1)) {
-				UARTwrite("Small diode conf not set correctly",26);
+				UARTwrite("IR1 diode conf not set correctly",26);
 		}
 
-		if(!writeWithCheckParam(ADCCONFIG_1, 1)) {
-				UARTwrite("Medium diode adr not set correctly",26);
+		//IR2
+		if(!writeWithCheckParam(ADCCONFIG_1, 2)) {
+				UARTwrite("IR2 diode adr not set correctly",26);
 		}
-		if(!writeWithCheckParam(ADCSENS_1, 0x0)) {
-				UARTwrite("Medium diode sens not set correctly",26);
+		if(!writeWithCheckParam(ADCSENS_1, ambientLight)) {
+				UARTwrite("IR2 diode sens not set correctly",26);
 		}
-		if(!writeWithCheckParam(MEASCONFIG_1, 4)) {
-				UARTwrite("Medium diode adr not set correctly",26);
+		if(!writeWithCheckParam(MEASCONFIG_1, 2)) {
+				UARTwrite("IR2 diode adr not set correctly",26);
 		}
 		
+		//IR3
 		if(!writeWithCheckParam(ADCCONFIG_2, 2)) {
-				UARTwrite("Large diode adr not set correctly",26);
+				UARTwrite("IR3 diode adr not set correctly",26);
 		}
-		if(!writeWithCheckParam(ADCSENS_2, 0x0)) {
-				UARTwrite("Large diode sens not set correctly",26);
+		if(!writeWithCheckParam(ADCSENS_2, ambientLight)) {
+				UARTwrite("IR3 diode sens not set correctly",26);
 		}
-		if(!writeWithCheckParam(MEASCONFIG_2, 2)) {
-				UARTwrite("Large diode adr not set correctly",26);
+		if(!writeWithCheckParam(MEASCONFIG_2, 4)) {
+				UARTwrite("IR3 diode adr not set correctly",26);
 		}
 
 }
